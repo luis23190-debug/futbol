@@ -1,0 +1,62 @@
+<h1 class="title">⚽ Estadísticas de Fútbol</h1>
+
+<!-- Selector de liga -->
+<div class="selector-box">
+  <select (change)="onLeagueChange($event)">
+    <option *ngFor="let l of leagues" [value]="l.id">
+      {{ l.name }}
+    </option>
+  </select>
+</div>
+
+<h2>{{ leagueInfo.name }} - Temporada {{ season }}</h2>
+
+<!-- TABLA -->
+<h2>Tabla de posiciones</h2>
+<table class="standings-table">
+  <tr>
+    <th>Pos</th>
+    <th>Equipo</th>
+    <th>Pts</th>
+  </tr>
+  <tr *ngFor="let t of standings">
+    <td>{{ t.rank }}</td>
+    <td><img class="team-logo" [src]="t.team.logo"> {{ t.team.name }}</td>
+    <td>{{ t.points }}</td>
+  </tr>
+</table>
+
+<!-- ÚLTIMOS RESULTADOS -->
+<h2>Últimos Resultados</h2>
+<div class="card-container">
+  <div class="card" *ngFor="let m of lastResults">
+    {{ m.teams.home.name }} {{ m.goals.home }} - {{ m.goals.away }} {{ m.teams.away.name }}
+  </div>
+</div>
+
+<!-- PRÓXIMOS PARTIDOS -->
+<h2>Próximos Partidos</h2>
+<div class="card-container">
+  <div class="card" *ngFor="let m of nextFixtures">
+    {{ m.teams.home.name }} vs {{ m.teams.away.name }}
+  </div>
+</div>
+
+<!-- GOLEADORES -->
+<h2>Goleadores</h2>
+<div class="card-container">
+  <div class="card" *ngFor="let p of topScorers">
+    <img class="player-photo" [src]="p.player.photo">
+    <p>{{ p.player.name }}</p>
+    <p>Goles: {{ p.statistics[0].goals.total }}</p>
+  </div>
+</div>
+
+<!-- EQUIPOS -->
+<h2>Equipos</h2>
+<div class="card-container">
+  <div class="card" *ngFor="let t of teams">
+    <img class="team-logo" [src]="t.team.logo">
+    {{ t.team.name }}
+  </div>
+</div>
